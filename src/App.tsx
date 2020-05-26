@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import styled from 'styled-components'
+import ThemeProvider from './components/theme/ThemeProvider'
+import Header from './components/atoms/header'
+import Footer from './components/atoms/footer'
+import TransactionList from './components/transaction-list'
+import TransactionStatistic from './components/transaction-statistics'
+
+const Container = styled.div`
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  background-color: ${({ theme }) => theme.background};
+`
+
+const Statistics = styled.div`
+  display: flex;
+  flex-direction: column;
+  flex: 4;
+  padding: 1em;
+`
+
+const Transactions = styled.div`
+  flex: 8;
+  padding: 1em;
+`
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <ThemeProvider>
+      <Container>
+        <Statistics>
+          <Header />
+          <TransactionStatistic />
+          <Footer />
+        </Statistics>
+        <Transactions>
+          <TransactionList />
+        </Transactions>
+      </Container>
+    </ThemeProvider>
+  )
 }
 
-export default App;
+export default App
