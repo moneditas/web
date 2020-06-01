@@ -12,14 +12,12 @@ const Container = styled.div`
   width: 100vw;
   background-color: ${({ theme }) => theme.background};
 `
-
 const Statistics = styled.div`
   display: flex;
   flex-direction: column;
   flex: 4;
-  padding: 1em;
+  padding: 1.5em 3em;
 `
-
 const Transactions = styled.div`
   flex: 8;
   padding: 1em;

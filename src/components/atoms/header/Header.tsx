@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { ReactComponent as Logo } from '../../../assets/icons/bitcoin-brands.svg'
+import { ReactComponent as bitcoinSvg } from '../../../assets/icons/bitcoin-brands.svg'
+import color from '../../theme/colors'
 
 const Header = styled.header`
   display: flex;
@@ -8,9 +9,10 @@ const Header = styled.header`
   align-items: center;
 `
 
-const BtcLogo = styled(Logo)`
-  width: 1.5em;
-  height: 1.5em;
+const BitcoinLogo = styled(bitcoinSvg)`
+  color: ${color.orange};
+  width: 2em;
+  height: 2em;
 `
 
 const Title = styled.h1`
@@ -22,7 +24,7 @@ const Title = styled.h1`
 export default React.memo(() => {
   return (
     <Header>
-      <BtcLogo />
+      <BitcoinLogo />
       <Title>Live bitcoin transaction statistics</Title>
     </Header>
   )

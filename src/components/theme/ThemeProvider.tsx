@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
+import color from './colors'
 
 interface ITheme {
   currentTheme: string,
@@ -13,15 +14,15 @@ interface ITheme {
 const lightTheme: ITheme = {
   currentTheme: 'light',
   setCurrentTheme: () => null,
-  background: '#F1F3F6',
-  color: '#000000',
+  background: color.grayLight,
+  color: color.black,
 }
 
 const darkTheme: ITheme = {
   currentTheme: 'dark',
   setCurrentTheme: () => null,
-  background: '#2D2D2D',
-  color: '#FFFFFF',
+  background: color.grayDark,
+  color: color.white,
 }
 
 const ThemeContext: React.FC = (props) => {
