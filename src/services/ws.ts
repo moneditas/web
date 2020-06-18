@@ -24,7 +24,7 @@ function parseTransaction(data: any): Transaction {
 }
 
 function createWebSocketClient (): any {
-  const socket: WebSocket = new WebSocket('ws://localhost:8080/ws/', ["wamp"]);
+  const socket: WebSocket = new WebSocket('ws://35.230.75.178/moneditas/ws/', ["wamp"]);
   const service: any = {};
   const listeners: Listener[] = []
 
