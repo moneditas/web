@@ -27,7 +27,7 @@ function parseTransaction(data: any): Transaction {
 }
 
 function createWebSocketClient (): any {
-  const socket = new ReconnectingWebSocket('ws://localhost:8083/ws/')
+  const socket = new ReconnectingWebSocket('wss://muzen.network/moneditas/ws/')
   const service: any = {};
   const listeners: Listener[] = []
 
