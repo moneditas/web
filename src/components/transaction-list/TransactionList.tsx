@@ -1,32 +1,39 @@
+// @ts-nocheck
+
 import React from 'react'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import styled from 'styled-components'
 import createWebSocketClient from '../../services/ws'
 
-const { close, onMessage } = createWebSocketClient()
 
-const Container = styled.div``
+const { onMessage } = createWebSocketClient()
 
 const TransactionList = () => {
-  const [transactions, setTransactions] = useState([]);
+  const [transactions, setTransactions] = useState([])
 
-    useEffect(() => {
-      onMessage(function (transaction : any) {
-        setTransactions((transactions) => ([...transactions, transaction] as any))
-      })
-    }, []);
+  useEffect(() => {
+    onMessage(function (transaction: any) {
+      setTransactions((transactions) => [...transactions, transaction] as any)
+    })
+  }, [])
 
-  return <Container>
-    <p>Transactions</p>
-
-    <ul>
-      {transactions.map((transaction, index) => {
-        return <li key={index}>{JSON.stringify(transaction, null, 2)}</li>
-      })}
-    </ul>
-
-  </Container>
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        transform: 'scaleY(-1)',
+        overflowY: 'auto'
+      }}
+    >
+      {transactions.reverse().map((i) => (
+        <div key={i.hash} style={{ transform: 'scaleY(-1)' }}>
+          {i.hash}
+        </div>
+      ))}
+    </div>
+  )
 }
 
 export default TransactionList

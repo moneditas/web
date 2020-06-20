@@ -1,3 +1,5 @@
+import ReconnectingWebSocket from 'reconnecting-websocket'
+
 interface Transaction {
   hash: string;
   size: number;
@@ -5,6 +7,7 @@ interface Transaction {
   spent: number;
 }
 
+const toMs = (seconds: number): number => seconds * 1000;
 type Listener = ((transaction: Transaction) => void);
 
 function parseTransaction(data: any): Transaction {
@@ -24,14 +27,11 @@ function parseTransaction(data: any): Transaction {
 }
 
 function createWebSocketClient (): any {
-  const socket: WebSocket = new WebSocket('ws://35.230.75.178/moneditas/ws/', ["wamp"]);
+  const socket = new ReconnectingWebSocket('ws://localhost:8083/ws/')
   const service: any = {};
   const listeners: Listener[] = []
 
-  // TODO: Add a remove listener function
-
   service.onMessage = function (listener: Listener) {
-    console.log('Add event listener')
     listeners.push(listener)
   }
 
@@ -40,16 +40,13 @@ function createWebSocketClient (): any {
   }
 
   socket.addEventListener('open', function (event) {
-    // Keep connection alive
-    setInterval(() => socket.send('Ping'), 1000 * 1)
+    // Server expects a ping every x seconds to keep connection alive
+    setInterval(() => socket.send('ping'), toMs(2))
   });
 
   socket.addEventListener('message', function (event: any) {
     try {
-
-      console.log(event.data)
-
-      if (event.data === 'Ping') {
+      if (event.data === 'ping' || event.data === 'pong') {
         return
       }
 
