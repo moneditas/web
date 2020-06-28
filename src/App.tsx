@@ -10,6 +10,8 @@ const Container = styled.div`
   display: flex;
   height: 100vh;
   width: 100vw;
+  max-width: 1600px;
+  margin: auto;
   background-color: ${({ theme }) => theme.background};
 `
 const Statistics = styled.div`

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import { ThemeContext } from 'styled-components';
+import { ThemeContext } from 'styled-components'
 import { ReactComponent as AdjustSvg } from '../../assets/icons/adjust-solid.svg'
 import { ReactComponent as ClockSvg } from '../../assets/icons/clock-regular.svg'
 import { ReactComponent as HourglassSvg } from '../../assets/icons/hourglass-regular.svg'
@@ -13,7 +13,9 @@ const Container = styled.div`
   flex: 1;
   display: flex;
   flex-direction: column;
+  align-self: center;
   justify-content: space-between;
+  width: 100%;
   background: rgb(31, 31, 31);
   background: linear-gradient(
     180deg,
@@ -22,29 +24,46 @@ const Container = styled.div`
   );
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
-  padding: 2em;
+  padding: 30px 0;
+  font-family: 'Nunito', sans-serif;
+`
+const InfoPanel = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  max-height: 650px;
+`
+const InfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0 30px 20px 0;
+`
+const InfoTitle = styled.h3`
+  font-size: 20px;
+  color: ${color.white};
+  margin: 0 0 10px 30%;
 `
 const InfoSection = styled.div`
   display: flex;
 `
 const InfoIcon = styled.div`
   display: flex;
-  width: 20%;
-  margin-top: 3.1em;
   justify-content: center;
+  width: 30%;
   svg {
     color: ${color.white};
-    height: 2em;
-    width: 2em;
+    opacity: 0.6;
+    height: 30px;
+    width: 30px;
+    margin-top: 3px;
   }
 `
-const InfoTitle = styled.h3`
-  color: ${color.white};
-  height: 2em;
-  margin: 0;
-`
 const InfoDescription = styled.p`
+  font-size: 30px;
+  font-weight: 600;
   color: ${color.white};
+  margin: 0;
 `
 const BtcTag = styled.span`
   color: ${color.orange};
@@ -61,67 +80,77 @@ const ThemeSwitcher = styled.a`
   user-select: none;
 
   svg {
-    height: 1em;
-    width: 1em;
+    height: 15px;
+    width: 15px;
   }
 `
 const ThemeLabel = styled.span`
   margin-right: 5px;
   text-transform: capitalize;
+  font-family: 'Roboto', sans-serif;
+  font-size: 8px;
 `
 
 const TransactionStatistic = () => {
-  const themeContext = useContext(ThemeContext);
+  const themeContext = useContext(ThemeContext)
   const isDarkTheme = themeContext.currentTheme === 'dark'
   const nextTheme = isDarkTheme ? 'light' : 'dark'
   const AdjustIconStyles = isDarkTheme ? { transform: 'rotate(180deg)' } : {}
 
   return (
     <Container>
-      <div>
-        <InfoSection>
-          <InfoIcon>
-            <ClockSvg />
-          </InfoIcon>
-          <div>
-            <InfoTitle>Time:</InfoTitle>
+      <InfoPanel>
+        <InfoContainer>
+          <InfoTitle>Time:</InfoTitle>
+          <InfoSection>
+            <InfoIcon>
+              <ClockSvg />
+            </InfoIcon>
             <InfoDescription>12:20</InfoDescription>
-          </div>
-        </InfoSection>
-        <InfoSection>
-          <InfoIcon>
-            <HourglassSvg />
-          </InfoIcon>
-          <div>
-            <InfoTitle>Total Transactions:</InfoTitle>
+          </InfoSection>
+        </InfoContainer>
+        <InfoContainer>
+          <InfoTitle>Total Transactions:</InfoTitle>
+          <InfoSection>
+            <InfoIcon>
+              <HourglassSvg />
+            </InfoIcon>
             <InfoDescription>1200</InfoDescription>
-          </div>
-        </InfoSection>
-        <InfoSection>
-          <InfoIcon>
-            <ExchangeSvg />
-          </InfoIcon>
-          <div>
-            <InfoTitle>Exchange Rate:</InfoTitle>
-            <InfoDescription>1 <BtcTag>BTC</BtcTag> / 14 <DollarTag>U$D</DollarTag></InfoDescription>
-          </div>
-        </InfoSection>
-        <InfoSection>
-          <InfoIcon>
-            <PiggySvg />
-          </InfoIcon>
-          <div>
-            <InfoTitle>Biggest Transaction:</InfoTitle>
-            <InfoDescription>1 <BtcTag>BTC</BtcTag></InfoDescription>
-            <InfoDescription>14 <DollarTag>U$D</DollarTag></InfoDescription>
-          </div>
-        </InfoSection>
-      </div>
+          </InfoSection>
+        </InfoContainer>
+        <InfoContainer>
+          <InfoTitle>Exchange Rate:</InfoTitle>
+          <InfoSection>
+            <InfoIcon>
+              <ExchangeSvg />
+            </InfoIcon>
+            <InfoDescription>
+              1 <BtcTag>BTC</BtcTag> / 14 <DollarTag>U$D</DollarTag>
+            </InfoDescription>
+          </InfoSection>
+        </InfoContainer>
+        <InfoContainer>
+          <InfoTitle>Biggest Transaction:</InfoTitle>
+          <InfoSection>
+            <InfoIcon>
+              <PiggySvg />
+            </InfoIcon>
+            <div>
+              <InfoDescription>
+                1 <BtcTag>BTC</BtcTag>
+              </InfoDescription>
+              <InfoDescription>
+                14 <DollarTag>U$D</DollarTag>
+              </InfoDescription>
+            </div>
+          </InfoSection>
+        </InfoContainer>
+      </InfoPanel>
       <ThemeSwitcher onClick={() => themeContext.setCurrentTheme(nextTheme)}>
         <ThemeLabel>{nextTheme} Theme</ThemeLabel>
         <AdjustSvg style={AdjustIconStyles} />
       </ThemeSwitcher>
-    </Container >
+    </Container>
   )
 }
 
