@@ -1,3 +1,3 @@
 import TransactionList from './TransactionList'
 
-export default TransactionList;
+export default TransactionList

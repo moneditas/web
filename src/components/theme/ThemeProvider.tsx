@@ -5,10 +5,10 @@ import { ThemeProvider } from 'styled-components'
 import color from './colors'
 
 interface ITheme {
-  currentTheme: string,
-  setCurrentTheme: Function,
-  background: string,
-  color: string,
+  currentTheme: string
+  setCurrentTheme: Function
+  background: string
+  color: string
 }
 
 const lightTheme: ITheme = {
@@ -30,17 +30,14 @@ const ThemeContext: React.FC = (props) => {
   const themeProps: ITheme = currentTheme === 'light' ? lightTheme : darkTheme
 
   useEffect(() => {
-    document.getElementsByTagName('html')[0].style.backgroundColor = themeProps.background
+    document.getElementsByTagName('html')[0].style.backgroundColor =
+      themeProps.background
   }, [currentTheme, themeProps])
 
   themeProps.currentTheme = currentTheme
   themeProps.setCurrentTheme = setCurrentTheme
 
-  return (
-    <ThemeProvider theme={themeProps}>
-      {props.children}
-    </ThemeProvider>
-  )
+  return <ThemeProvider theme={themeProps}>{props.children}</ThemeProvider>
 }
 
 export default ThemeContext

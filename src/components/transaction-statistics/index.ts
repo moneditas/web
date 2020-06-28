@@ -1,3 +1,3 @@
 import TransactionStatistic from './TransactionStatistic'
 
-export default TransactionStatistic;
+export default TransactionStatistic
