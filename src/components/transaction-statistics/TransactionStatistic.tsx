@@ -2,12 +2,14 @@ import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
 import { ThemeContext } from 'styled-components'
-import { ReactComponent as AdjustSvg } from '../../assets/icons/adjust-solid.svg'
-import { ReactComponent as ClockSvg } from '../../assets/icons/clock-regular.svg'
-import { ReactComponent as HourglassSvg } from '../../assets/icons/hourglass-regular.svg'
-import { ReactComponent as ExchangeSvg } from '../../assets/icons/exchange-alt-solid.svg'
-import { ReactComponent as PiggySvg } from '../../assets/icons/piggy-bank-solid.svg'
-import color from '../theme/colors'
+import { ReactComponent as AdjustSvg } from 'assets/icons/adjust-solid.svg'
+import { ReactComponent as ClockSvg } from 'assets/icons/clock-regular.svg'
+import { ReactComponent as HourglassSvg } from 'assets/icons/hourglass-regular.svg'
+import { ReactComponent as ExchangeSvg } from 'assets/icons/exchange-alt-solid.svg'
+import { ReactComponent as PiggySvg } from 'assets/icons/piggy-bank-solid.svg'
+import color from 'components/theme/colors'
+import { Themes } from 'components/theme/ThemeProvider'
+import { Theme } from 'components/theme/ThemeProvider'
 
 const Container = styled.div`
   flex: 1;
@@ -17,11 +19,7 @@ const Container = styled.div`
   justify-content: space-between;
   width: 100%;
   background: rgb(31, 31, 31);
-  background: linear-gradient(
-    180deg,
-    rgba(31, 31, 31, 1) 0%,
-    rgba(17, 17, 17, 1) 100%
-  );
+  background: linear-gradient(180deg, rgba(31, 31, 31, 1) 0%, rgba(17, 17, 17, 1) 100%);
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
   border-radius: 30px;
   padding: 30px 0;
@@ -88,14 +86,15 @@ const ThemeLabel = styled.span`
   margin-right: 5px;
   text-transform: capitalize;
   font-family: 'Roboto', sans-serif;
-  font-size: 8px;
+  font-size: 10px;
 `
 
 const TransactionStatistic = () => {
-  const themeContext = useContext(ThemeContext)
+  const themeContext: Theme = useContext(ThemeContext)
   const isDarkTheme = themeContext.currentTheme === 'dark'
-  const nextTheme = isDarkTheme ? 'light' : 'dark'
-  const AdjustIconStyles = isDarkTheme ? { transform: 'rotate(180deg)' } : {}
+  const nextTheme: Themes = isDarkTheme ? 'light' : 'dark'
+  const AdjustIconStyles: React.CSSProperties = isDarkTheme ? { transform: 'rotate(180deg)' } : {}
+  const handleThemeSwitch = () => themeContext.setCurrentTheme(nextTheme)
 
   return (
     <Container>
@@ -146,7 +145,7 @@ const TransactionStatistic = () => {
           </InfoSection>
         </InfoContainer>
       </InfoPanel>
-      <ThemeSwitcher onClick={() => themeContext.setCurrentTheme(nextTheme)}>
+      <ThemeSwitcher onClick={handleThemeSwitch}>
         <ThemeLabel>{nextTheme} Theme</ThemeLabel>
         <AdjustSvg style={AdjustIconStyles} />
       </ThemeSwitcher>
