@@ -1,38 +1,70 @@
 // @ts-nocheck
 
 import React from 'react'
-import { useState } from 'react'
-import { useEffect } from 'react'
-import createWebSocketClient from '../../services/ws'
+import { useContext } from 'react'
+import styled from 'styled-components'
+import TransactionContext from 'services/transactionContext'
+import { Theme } from 'components/theme/ThemeProvider'
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-y: auto;
+`
+const Row = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 15px 30px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: ${({ theme }: { theme: Theme }) => theme.color};
+  background-color: ${({ theme }: { theme: Theme }) => theme.backgroundSecondary};
+  font-family: 'Roboto Mono';
+`
+const Hash = styled.div`
+  flex: 1;
+  span {
+    display: flex;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 500px;
+  }
+`
+const Time = styled.span`
+  padding-left: 5px;
+`
+const Size = styled.span`
+  padding-left: 5px;
+`
+const Spent = styled.span`
+  padding-left: 5px;
+`
 
-const { onMessage } = createWebSocketClient()
+const getTime = (date) => {
+  return new Date(date).toLocaleTimeString(navigator.language, {
+    hour: '2-digit',
+    minute: '2-digit',
+  })
+}
 
 const TransactionList = () => {
-  const [transactions, setTransactions] = useState([])
-
-  useEffect(() => {
-    onMessage(function (transaction: any) {
-      setTransactions((transactions) => [...transactions, transaction] as any)
-    })
-  }, [])
+  const { transactions } = useContext(TransactionContext)
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        height: '100%',
-        transform: 'scaleY(-1)',
-        overflowY: 'auto'
-      }}
-    >
-      {transactions.reverse().map((i) => (
-        <div key={i.hash} style={{ transform: 'scaleY(-1)' }}>
-          {i.hash}
-        </div>
+    <Container>
+      {transactions.map((t) => (
+        <Row key={t.hash}>
+          <Hash>
+            <span>{t.hash}</span>
+          </Hash>
+          <Time>{getTime(t.time)}</Time>
+          <Size>{t.size}</Size>
+          <Spent>{t.spent}</Spent>
+        </Row>
       ))}
-    </div>
+    </Container>
   )
 }
 

@@ -4,34 +4,37 @@ import { useEffect } from 'react'
 import { ThemeProvider } from 'styled-components'
 import color from './colors'
 
-interface ITheme {
-  currentTheme: string
-  setCurrentTheme: Function
+export type Themes = 'light' | 'dark'
+export type Theme = {
+  currentTheme: Themes
+  setCurrentTheme: React.Dispatch<React.SetStateAction<Themes>>
   background: string
+  backgroundSecondary: string
   color: string
 }
 
-const lightTheme: ITheme = {
+const lightTheme: Theme = {
   currentTheme: 'light',
-  setCurrentTheme: () => null,
+  setCurrentTheme: () => {},
   background: color.grayLight,
+  backgroundSecondary: color.white,
   color: color.black,
 }
 
-const darkTheme: ITheme = {
+const darkTheme: Theme = {
   currentTheme: 'dark',
-  setCurrentTheme: () => null,
+  setCurrentTheme: () => {},
   background: color.grayDark,
+  backgroundSecondary: color.black,
   color: color.white,
 }
 
 const ThemeContext: React.FC = (props) => {
-  const [currentTheme, setCurrentTheme] = useState<string>('dark')
-  const themeProps: ITheme = currentTheme === 'light' ? lightTheme : darkTheme
+  const [currentTheme, setCurrentTheme] = useState<Themes>('dark')
+  const themeProps: Theme = currentTheme === 'light' ? lightTheme : darkTheme
 
   useEffect(() => {
-    document.getElementsByTagName('html')[0].style.backgroundColor =
-      themeProps.background
+    document.getElementsByTagName('html')[0].style.backgroundColor = themeProps.background
   }, [currentTheme, themeProps])
 
   themeProps.currentTheme = currentTheme
