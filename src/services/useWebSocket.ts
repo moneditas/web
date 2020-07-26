@@ -28,7 +28,7 @@ function parseTransaction(data: any): Transaction {
 
 export function useWebSocket(): [Transaction[], ReconnectingWebSocket] {
   const [transactions, setTransactions] = useState<Transaction[]>([])
-  const [socket] = useState(() => new ReconnectingWebSocket('wss://muzen.network/moneditas/ws/'))
+  const [socket] = useState(() => new ReconnectingWebSocket('ws://moneditas.herokuapp.com/ws/'))
 
   useEffect(() => {
     socket.addEventListener('open', function (event) {
