@@ -1,10 +1,10 @@
-// @ts-nocheck
-
 import React from 'react'
 import { useContext } from 'react'
 import styled from 'styled-components'
-import TransactionContext from 'services/transactionContext'
+import { TransactionContext } from 'services/transactionContext'
 import { Theme } from 'components/theme/ThemeProvider'
+
+import { Transaction } from 'services/useWebSocket'
 
 const Container = styled.div`
   display: flex;
@@ -50,7 +50,7 @@ const getTime = (date) => {
 }
 
 const TransactionList = () => {
-  const { transactions } = useContext(TransactionContext)
+  const { transactions: Transaction[] } = useContext(TransactionContext)
 
   return (
     <Container>

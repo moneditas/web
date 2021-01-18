@@ -114,7 +114,7 @@ const TransactionStatistic = () => {
             <InfoIcon>
               <HourglassSvg />
             </InfoIcon>
-            <InfoDescription>1200</InfoDescription>
+            <InfoDescription>123</InfoDescription>
           </InfoSection>
         </InfoContainer>
         <InfoContainer>

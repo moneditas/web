@@ -31,7 +31,7 @@ const Footer: React.FC = () => {
       Made with&nbsp;
       {isDarkTheme ? <span>&#10084;&#65039;</span> : <span>&#128420;</span>}
       &nbsp;by
-      <Link href="https://github.com/ughettoariel" target="_blank" rel="noopener noreferrer">
+      <Link href="https://github.com/dvnahuel" target="_blank" rel="noopener noreferrer">
         <Avatar
           src="https://avatars3.githubusercontent.com/u/23080631?s=460&u=f38265b9c5bc73462b28371e5192f8885c0f121b&v=4"
           alt="dvnahuel github"

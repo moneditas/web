@@ -38,13 +38,13 @@ export function useWebSocket(): [Transaction[], ReconnectingWebSocket] {
 
     socket.addEventListener('message', function (event: any) {
       try {
-        if (event.data === 'ping' || event.data === 'pong') {
+        if (!event || event.data === 'ping' || event.data === 'pong') {
           return
         }
 
         const data = JSON.parse(event.data)
         const transaction: Transaction = parseTransaction(data)
-
+        console.log(transaction)
         setTransactions((transactions) => [transaction, ...transactions])
       } catch (err) {
         console.error(err)
